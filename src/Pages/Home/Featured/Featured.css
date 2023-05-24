@@ -1,0 +1,5 @@
+.featured-item{
+    background-image: linear-gradient(0deg, rgba(21, 21, 21, 0.7), rgba(21, 21, 21, 0.7)), url(../../../assets/home/featured.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
