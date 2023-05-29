@@ -5,6 +5,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const SignUp = () => {
   const { createUser } = useContext(AuthContext)
@@ -27,7 +28,7 @@ const SignUp = () => {
         })
           .then(() => {
             // Profile updated!
-            const saveUser = {name: data.name, email: data.email}
+            const saveUser = {name: data.name, email: data.email};
             fetch(`http://localhost:5000/users`, {
               method: "POST",
               headers: {
@@ -141,6 +142,8 @@ const SignUp = () => {
               </div>
             </form>
             <p><small>Allredy have an account <Link to={'/login'}>Login</Link></small></p>
+
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>
