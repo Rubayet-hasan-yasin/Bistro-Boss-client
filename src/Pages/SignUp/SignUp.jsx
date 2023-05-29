@@ -2,17 +2,19 @@ import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
 
 const SignUp = () => {
   const { createUser } = useContext(AuthContext)
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const location = useLocation();
+  const navigate = useNavigate()
+
+  const from = location.state?.from?.pathname || '/';
 
   const onSubmit = data => {
-
-    console.log(data)
 
     createUser(data.email, data.password)
       .then(result => {
@@ -25,13 +27,32 @@ const SignUp = () => {
         })
           .then(() => {
             // Profile updated!
-            // ...
-            Swal.fire(
-              'Sign Up success',
-              '',
-              'success'
-            )
-            reset()
+            const saveUser = {name: data.name, email: data.email}
+            fetch(`http://localhost:5000/users`, {
+              method: "POST",
+              headers: {
+                'content-type': 'application/json'
+              },
+              body: JSON.stringify(saveUser)
+
+            })
+              .then(res => res.json())
+              .then(data => {
+                if (data.insertedId) {
+
+                  // ...
+                  Swal.fire(
+                    'Sign Up success',
+                    '',
+                    'success'
+                  )
+                  reset()
+                  navigate(from, { replace: true });
+                }
+              })
+
+
+
           })
           .catch((error) => {
             // An error occurred
