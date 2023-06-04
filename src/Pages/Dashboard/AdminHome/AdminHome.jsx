@@ -1,6 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import BarCharts from "../../../components/chart/BarCharts";
+import PieChartss from "../../../components/chart/PieChartss";
+
 
 const AdminHome = () => {
     const { user } = useAuth();
@@ -14,6 +17,9 @@ const AdminHome = () => {
             return res.data;
         }
     })
+
+
+
 
 
 
@@ -61,6 +67,15 @@ const AdminHome = () => {
                 </div>
 
             </div>
+
+            <div className="flex">
+                <BarCharts />
+
+                <div className="w-full">
+                    <PieChartss />
+                </div>
+            </div>
+
         </div>
     );
 };
