@@ -5,7 +5,6 @@ import Menu from "../Pages/Menu/Menu/Menu";
 import Order from "../Pages/Order/Order/Order";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
-import Secret from "../Pages/Secret/Secret";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layout/Dashboard";
 import MyCart from "../Pages/Dashboard/MyCart/MyCart";
@@ -14,6 +13,8 @@ import AddItem from "../Pages/Dashboard/AddItem/AddItem";
 import AdminRoute from "./AdminRoute";
 import ManageItems from "../Pages/Dashboard/ManageItems/ManageItems";
 import Payment from "../Pages/Dashboard/Payment/Payment";
+import UserHome from "../Pages/Dashboard/UserHome/UserHome";
+import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
 
 
 
@@ -43,10 +44,7 @@ export const router = createBrowserRouter([
                 path: '/signup',
                 element: <SignUp/>
             },
-            {
-                path: '/secret',
-                element: <PrivateRoute><Secret/></PrivateRoute>
-            }
+            
             
         ]
     },
@@ -55,12 +53,21 @@ export const router = createBrowserRouter([
         element: <PrivateRoute><Dashboard/></PrivateRoute>,
         children: [
             {
+                path: 'userhome',
+                element: <UserHome/>
+            },
+            {
                 path: 'mycart',
                 element: <MyCart/>
             },
             {
                 path: 'payment',
                 element: <Payment/>
+            },
+            //admin routes
+            {
+                path: 'adminhome',
+                element: <AdminRoute><AdminHome/></AdminRoute>
             },
             {
                 path: 'allusers',
